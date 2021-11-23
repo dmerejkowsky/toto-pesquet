@@ -1,12 +1,20 @@
 use crate::Coordinates;
 
 pub struct Map {
+    size: u8,
     obstacles: Vec<Coordinates>,
 }
 
 impl Map {
-    pub fn new() -> Self {
-        Self { obstacles: vec![] }
+    pub fn new(size: u8) -> Self {
+        Self {
+            obstacles: vec![],
+            size,
+        }
+    }
+
+    pub fn size(&self) -> u8 {
+        self.size
     }
 
     pub fn add_obstacle(&mut self, coordinates: Coordinates) {

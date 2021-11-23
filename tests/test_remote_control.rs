@@ -1,11 +1,13 @@
 use rover::{Coordinates, Map, Rover};
 
+const MAP_SIZE: u8 = 10;
+
 macro_rules! command_tests {
     ($($name:ident: $command:expr => $expected:expr,)*) => {
     $(
         #[test]
         fn $name() {
-            let map = Map::new();
+            let map = Map::new(MAP_SIZE);
             let coordinates = Coordinates::origin();
             let mut rover = Rover::new(coordinates, map);
             let ok = rover.execute($command);
@@ -49,8 +51,8 @@ command_tests! {
 
 #[test]
 fn can_get_stuck_if_obstacle_in_map() {
-    let mut map = Map::new();
-    map.add_obstacle(Coordinates { x: 0, y: 3 });
+    let mut map = Map::new(MAP_SIZE);
+    map.add_obstacle(Coordinates::new(0, 3));
 
     let mut rover = Rover::new(Coordinates::origin(), map);
 

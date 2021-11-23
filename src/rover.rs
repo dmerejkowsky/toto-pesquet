@@ -3,26 +3,15 @@ use crate::Direction;
 use crate::Direction::*;
 use crate::Map;
 
-impl Coordinates {
-    fn translate(coordinates: Coordinates, direction: Direction) -> Coordinates {
-        match direction {
-            North => Coordinates {
-                x: coordinates.x,
-                y: add_one_and_clip(coordinates.y, 10),
-            },
-            South => Coordinates {
-                x: coordinates.x,
-                y: sub_one_and_clip(coordinates.y, 10),
-            },
-            East => Coordinates {
-                x: add_one_and_clip(coordinates.x, 10),
-                y: coordinates.y,
-            },
-            West => Coordinates {
-                x: sub_one_and_clip(coordinates.x, 10),
-                y: coordinates.y,
-            },
-        }
+fn translate(map: &Map, coordinates: Coordinates, direction: Direction) -> Coordinates {
+    let max = map.size();
+    let x = coordinates.x();
+    let y = coordinates.y();
+    match direction {
+        North => Coordinates::new(x, add_one_and_clip(y, max)),
+        South => Coordinates::new(x, sub_one_and_clip(y, max)),
+        East => Coordinates::new(add_one_and_clip(x, max), y),
+        West => Coordinates::new(sub_one_and_clip(x, max), y),
     }
 }
 
@@ -67,7 +56,7 @@ impl Rover {
                     self.direction = self.direction.left();
                 }
                 'F' => {
-                    let new_coordinates = Coordinates::translate(self.coordinates, self.direction);
+                    let new_coordinates = translate(&self.map, self.coordinates, self.direction);
                     if self.map.has_obstacle(new_coordinates) {
                         return false;
                     } else {
@@ -84,7 +73,9 @@ impl Rover {
     pub fn describe_position(&self) -> String {
         format!(
             "{}:{}:{}",
-            self.coordinates.x, self.coordinates.y, self.direction
+            self.coordinates.x(),
+            self.coordinates.y(),
+            self.direction
         )
     }
 }
