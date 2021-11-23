@@ -1,4 +1,4 @@
-use super::*;
+use rover::{Coordinates, Map, Rover};
 
 macro_rules! command_tests {
     ($($name:ident: $command:expr => $expected:expr,)*) => {
@@ -10,7 +10,7 @@ macro_rules! command_tests {
             let mut rover = Rover::new(coordinates, map);
             let ok = rover.execute($command);
             assert!(ok);
-            assert_eq!(rover.status(), $expected);
+            assert_eq!(rover.describe_position(), $expected);
         }
     )*
     }
@@ -56,5 +56,5 @@ fn can_get_stuck_if_obstacle_in_map() {
 
     let ok = rover.execute("FFF");
     assert!(!ok);
-    assert_eq!(rover.status(), "0:2:N");
+    assert_eq!(rover.describe_position(), "0:2:N");
 }
