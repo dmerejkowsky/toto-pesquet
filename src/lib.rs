@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use std::fmt::Display;
 
 #[derive(Debug, Clone, Copy)]
@@ -16,8 +17,26 @@ impl Default for Direction {
 
 use Direction::*;
 
+pub struct Map {
+    obstacles: Vec<Coordinates>,
+}
+
+impl Map {
+    pub fn new() -> Self {
+        Self { obstacles: vec![] }
+    }
+
+    pub fn add_obstacle(&mut self, coordinates: Coordinates) {
+        self.obstacles.push(coordinates);
+    }
+
+    pub(crate) fn has_obstacle(&self, coordinates: Coordinates) -> bool {
+        self.obstacles.iter().find(|&&x| x == coordinates).is_some()
+    }
+}
+
 impl Direction {
-    pub fn left(self) -> Self {
+    fn left(self) -> Self {
         match self {
             North => West,
             South => East,
@@ -26,7 +45,7 @@ impl Direction {
         }
     }
 
-    pub fn right(self) -> Self {
+    fn right(self) -> Self {
         match self {
             North => East,
             South => West,
@@ -47,10 +66,16 @@ impl Display for Direction {
     }
 }
 
-#[derive(Debug, Default, Clone, Copy)]
-struct Coordinates {
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+pub struct Coordinates {
     x: u8,
     y: u8,
+}
+
+impl Coordinates {
+    fn origin() -> Self {
+        Self { x: 0, y: 0 }
+    }
 }
 
 fn add_one_and_clip(x: u8, max: u8) -> u8 {
@@ -78,20 +103,45 @@ impl Coordinates {
             West => self.x = sub_one_and_clip(self.x, 10),
         }
     }
+
+    fn moved_to(&self, direction: Direction) -> Coordinates {
+        match direction {
+            North => Coordinates {
+                x: self.x,
+                y: add_one_and_clip(self.y, 10),
+            },
+            South => Coordinates {
+                x: self.x,
+                y: sub_one_and_clip(self.y, 10),
+            },
+            East => Coordinates {
+                x: add_one_and_clip(self.x, 10),
+                y: self.y,
+            },
+            West => Coordinates {
+                x: sub_one_and_clip(self.x, 10),
+                y: self.y,
+            },
+        }
+    }
 }
 
-#[derive(Default)]
 pub struct Rover {
     direction: Direction,
     coordinates: Coordinates,
+    map: Map,
 }
 
 impl Rover {
-    pub fn new() -> Self {
-        Default::default()
+    fn new(coordinates: Coordinates, map: Map) -> Self {
+        Self {
+            direction: North,
+            coordinates,
+            map,
+        }
     }
 
-    pub fn execute(&mut self, command: &str) -> String {
+    pub fn execute(&mut self, command: &str) -> bool {
         for c in command.chars() {
             match c {
                 'R' => {
@@ -100,13 +150,22 @@ impl Rover {
                 'L' => {
                     self.direction = self.direction.left();
                 }
-                'M' => {
-                    self.coordinates.move_to(self.direction);
+                'F' => {
+                    let new_coordinates = self.coordinates.moved_to(self.direction);
+                    if self.map.has_obstacle(new_coordinates) {
+                        return false;
+                    } else {
+                        self.coordinates = new_coordinates;
+                    }
                 }
-                _ => todo!(),
+                c => panic!("Invalid char '{}' in command string", c),
             }
         }
 
+        true
+    }
+
+    pub fn status(&self) -> String {
         format!(
             "{}:{}:{}",
             self.coordinates.x, self.coordinates.y, self.direction
