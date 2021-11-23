@@ -3,34 +3,6 @@ use crate::Direction;
 use crate::Direction::*;
 use crate::Map;
 
-fn translate(map: &Map, coordinates: Coordinates, direction: Direction) -> Coordinates {
-    let max = map.size();
-    let x = coordinates.x();
-    let y = coordinates.y();
-    match direction {
-        North => Coordinates::new(x, add_one_and_clip(y, max)),
-        South => Coordinates::new(x, sub_one_and_clip(y, max)),
-        East => Coordinates::new(add_one_and_clip(x, max), y),
-        West => Coordinates::new(sub_one_and_clip(x, max), y),
-    }
-}
-
-fn add_one_and_clip(x: u8, max: u8) -> u8 {
-    if x == max {
-        0
-    } else {
-        x + 1
-    }
-}
-
-fn sub_one_and_clip(x: u8, max: u8) -> u8 {
-    if x == 0 {
-        max
-    } else {
-        x - 1
-    }
-}
-
 pub struct Rover {
     direction: Direction,
     coordinates: Coordinates,
@@ -77,5 +49,33 @@ impl Rover {
             self.coordinates.y(),
             self.direction
         )
+    }
+}
+
+fn translate(map: &Map, coordinates: Coordinates, direction: Direction) -> Coordinates {
+    let max = map.size();
+    let x = coordinates.x();
+    let y = coordinates.y();
+    match direction {
+        North => Coordinates::new(x, add_one_and_clip(y, max)),
+        South => Coordinates::new(x, sub_one_and_clip(y, max)),
+        East => Coordinates::new(add_one_and_clip(x, max), y),
+        West => Coordinates::new(sub_one_and_clip(x, max), y),
+    }
+}
+
+fn add_one_and_clip(x: u8, max: u8) -> u8 {
+    if x == max {
+        0
+    } else {
+        x + 1
+    }
+}
+
+fn sub_one_and_clip(x: u8, max: u8) -> u8 {
+    if x == 0 {
+        max
+    } else {
+        x - 1
     }
 }
