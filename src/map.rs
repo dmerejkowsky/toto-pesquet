@@ -22,6 +22,6 @@ impl Map {
     }
 
     pub(crate) fn has_obstacle(&self, coordinates: Coordinates) -> bool {
-        self.obstacles.iter().find(|&&x| x == coordinates).is_some()
+        self.obstacles.iter().any(|&x| x == coordinates)
     }
 }
