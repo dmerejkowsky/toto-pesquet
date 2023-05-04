@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "ts-node node_modules/tape/bin/tape tests/*.tests.ts | tap-spec"
+    "test": "ts-node node_modules/tape/bin/tape tests/*.tests.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/tape": "^4.13.2",
-    "tap-spec": "^5.0.0",
     "typescript": "^4.9.5"
   },
   "devDependencies": {
