@@ -1,5 +1,3 @@
-import { isAssertClause } from "typescript"
-
 export class Coordinates {
   readonly x: number
   readonly y: number
