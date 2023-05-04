@@ -1,4 +1,5 @@
-import test from 'tape'
+import { describe, test, expect } from '@jest/globals'
+
 import { Coordinates, Direction, Orientation, Rotation, rotate, translate } from '../map'
 
 type rotationTest = [Orientation, Rotation, Orientation]
@@ -13,8 +14,7 @@ for (const [orientation, rotation, expected] of rotationTests) {
 
     const actual = rotate(orientation, rotation)
 
-    t.deepEqual(actual, expected)
-    t.end()
+    expect(actual).toEqual(expected)
   })
 }
 
@@ -35,8 +35,6 @@ for (const [input, orientation, direction, expected] of translateTests) {
 
     const actualCoordinates = translate(startCoordinates, orientation, direction)
 
-
-    t.deepEqual(actualCoordinates, expectedCoordinates)
-    t.end()
+    expect(actualCoordinates).toEqual(expectedCoordinates)
   })
 }

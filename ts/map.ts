@@ -40,7 +40,7 @@ export const translate = (coordinates: Coordinates, orientation: Orientation, di
 const translateForward = ({ x, y }: Coordinates, orientation: Orientation): Coordinates => {
   switch (orientation) {
     case Orientation.North:
-      return new Coordinates(x, y + 1)
+      return new Coordinates(x + 1, y)
     case Orientation.South:
       return new Coordinates(x, y - 1)
     case Orientation.West:

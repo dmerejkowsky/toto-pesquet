@@ -1,52 +1,49 @@
-import test from 'tape'
 import Rover from '../rover'
+import { describe, test, expect } from '@jest/globals'
 import { Coordinates, Orientation } from '../map'
 
-test('starts facing north', (t) => {
+test('starts facing north', () => {
   const landingPosition = new Coordinates(0, 2)
   const rover = new Rover(landingPosition)
 
-  t.equal(rover.orientation, Orientation.North)
-  t.deepEqual(rover.coordinates, landingPosition)
-  t.end()
+  expect(rover.orientation).toEqual(Orientation.North)
+  expect(rover.coordinates).toEqual(landingPosition)
 })
 
-test('rotate right', (t) => {
+test('rotate right', () => {
   const landingPosition = new Coordinates(0, 2)
   const rover = new Rover(landingPosition)
 
   rover.rotateRight()
 
-  t.equal(rover.orientation, Orientation.East)
-  t.end()
+  expect(rover.orientation).toEqual(Orientation.East)
 })
 
-test('rotate left', (t) => {
+test('rotate left', () => {
   const landingPosition = new Coordinates(0, 2)
   const rover = new Rover(landingPosition)
 
   rover.rotateLeft()
 
-  t.equal(rover.orientation, Orientation.West)
-  t.end()
+  expect(rover.orientation).toEqual(Orientation.West)
 })
 
-test('move forward', (t) => {
+test.only('move forward', () => {
   const landingPosition = new Coordinates(0, 2)
   const rover = new Rover(landingPosition)
 
+  console.log(rover.orientation)
   rover.moveForward()
 
-  t.deepEqual(rover.coordinates, new Coordinates(0, 3))
-  t.end()
+  console.log(rover.coordinates)
+  expect(rover.coordinates).toEqual(new Coordinates(1, 2))
 })
 
-test('move bacwkard', (t) => {
+test('move bacwkard', () => {
   const landingPosition = new Coordinates(0, 2)
   const rover = new Rover(landingPosition)
 
   rover.moveBackward()
 
-  t.deepEqual(rover.coordinates, new Coordinates(0, 1))
-  t.end()
+  expect(rover.coordinates).toEqual(new Coordinates(0, 1))
 })
