@@ -1,7 +1,8 @@
 import { Coordinates, Orientation, Direction, Rotation, translate, rotate } from './map'
+import Movable from './movable'
 
 
-export default class Rover {
+export default class Rover implements Movable {
   coordinates: Coordinates
   orientation: Orientation
 
