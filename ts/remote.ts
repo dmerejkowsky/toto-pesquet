@@ -9,6 +9,7 @@ export default class Remote {
 
   execute(command: string) {
     for (const letter of command) {
+      console.log(letter)
       switch (letter) {
         case 'F':
           this.target.moveForward()

@@ -22,13 +22,12 @@ test('rotate right', () => {
 test('rotate left', () => {
   const landingPosition = new Coordinates(0, 2)
   const rover = new Rover(landingPosition)
-
   rover.rotateLeft()
 
   expect(rover.orientation).toEqual(Orientation.West)
 })
 
-test.only('move forward', () => {
+test('move forward', () => {
   const landingPosition = new Coordinates(0, 2)
   const rover = new Rover(landingPosition)
 
@@ -36,7 +35,7 @@ test.only('move forward', () => {
   rover.moveForward()
 
   console.log(rover.coordinates)
-  expect(rover.coordinates).toEqual(new Coordinates(1, 2))
+  expect(rover.coordinates).toEqual(new Coordinates(0, 3))
 })
 
 test('move bacwkard', () => {

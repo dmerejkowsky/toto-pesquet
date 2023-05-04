@@ -11,6 +11,6 @@ describe('end to end tests', () => {
 
     remote.execute("FFRF")
 
-    expect(rover.coordinates).toBe(new Coordinates(1, 2))
+    expect(rover.coordinates).toEqual(new Coordinates(1, 2))
   })
 })

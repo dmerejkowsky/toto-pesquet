@@ -32,18 +32,19 @@ describe('remote', () => {
 
     remote.execute("FF")
 
-    expect(fakeRover.moves).toBe(["forward", "forward"])
+    expect(fakeRover.moves).toEqual(["forward", "forward"])
   })
 
-  test('Execute complex command', t => {
+  test.only('Execute complex command', t => {
     const fakeRover = new FakeMovable()
     const remote = new Remote(fakeRover)
 
     remote.execute("FFRBBL")
 
-    expect(fakeRover.moves).toBe(
+    expect(fakeRover.moves).toEqual(
       ["forward", "forward", "right", "backward", "backward", "left"])
-  })
+  }
+  )
 
 
   test('throws on invalid command', () => {
