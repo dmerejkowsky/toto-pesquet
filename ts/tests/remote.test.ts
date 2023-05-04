@@ -1,7 +1,5 @@
 import { describe, test, expect } from '@jest/globals'
 import Remote from '../remote'
-import Rover from '../rover'
-import { Coordinates } from '../map'
 import Movable from '../movable'
 
 class FakeMovable implements Movable {
@@ -35,16 +33,16 @@ describe('remote', () => {
     expect(fakeRover.moves).toEqual(["forward", "forward"])
   })
 
-  test.only('Execute complex command', t => {
+  test('Execute complex command', () => {
     const fakeRover = new FakeMovable()
     const remote = new Remote(fakeRover)
 
     remote.execute("FFRBBL")
 
     expect(fakeRover.moves).toEqual(
-      ["forward", "forward", "right", "backward", "backward", "left"])
-  }
-  )
+      ["forward", "forward", "right", "backward", "backward", "left"]
+    )
+  })
 
 
   test('throws on invalid command', () => {
@@ -52,9 +50,7 @@ describe('remote', () => {
     const remote = new Remote(fakeRover)
 
     expect(
-      () => {
-        remote.execute("FCAB")
-      }
+      () => { remote.execute("FCAB") }
     ).toThrow()
 
   })

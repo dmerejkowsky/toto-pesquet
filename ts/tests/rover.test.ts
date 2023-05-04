@@ -31,10 +31,8 @@ test('move forward', () => {
   const landingPosition = new Coordinates(0, 2)
   const rover = new Rover(landingPosition)
 
-  console.log(rover.orientation)
   rover.moveForward()
 
-  console.log(rover.coordinates)
   expect(rover.coordinates).toEqual(new Coordinates(0, 3))
 })
 
