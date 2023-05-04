@@ -14,8 +14,17 @@ export default class Rover {
     this.coordinates = translate(this.coordinates, this.orientation, Direction.Forward)
   }
 
+  moveBackward() {
+    this.coordinates = translate(this.coordinates, this.orientation, Direction.Backward)
+  }
+
+  rotateLeft() {
+    this.orientation = rotate(this.orientation, Rotation.Left)
+  }
+
   rotateRight() {
     this.orientation = rotate(this.orientation, Rotation.Right)
   }
+
 
 }

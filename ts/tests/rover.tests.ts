@@ -21,12 +21,32 @@ test('rotate right', (t) => {
   t.end()
 })
 
+test('rotate left', (t) => {
+  const landingPosition = new Coordinates(0, 2)
+  const rover = new Rover(landingPosition)
+
+  rover.rotateLeft()
+
+  t.equal(rover.orientation, Orientation.West)
+  t.end()
+})
+
 test('move forward', (t) => {
   const landingPosition = new Coordinates(0, 2)
   const rover = new Rover(landingPosition)
 
   rover.moveForward()
 
-  t.deepEqual(rover.coordinates, new Coordinates(1, 2))
+  t.deepEqual(rover.coordinates, new Coordinates(0, 3))
+  t.end()
+})
+
+test('move bacwkard', (t) => {
+  const landingPosition = new Coordinates(0, 2)
+  const rover = new Rover(landingPosition)
+
+  rover.moveBackward()
+
+  t.deepEqual(rover.coordinates, new Coordinates(0, 1))
   t.end()
 })
