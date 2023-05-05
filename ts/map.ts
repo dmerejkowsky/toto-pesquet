@@ -15,6 +15,24 @@ export enum Orientation {
   West = "West"
 }
 
+class Vector {
+  readonly x: number
+  readonly y: number
+  constructor(x: number, y: number) {
+    this.x = x
+    this.y = y
+  }
+}
+
+const UNIT_VECTORS: Map<Orientation, Vector> = new Map(
+  [
+    [Orientation.North, new Vector(0, 1)],
+    [Orientation.South, new Vector(0, -1)],
+    [Orientation.East, new Vector(1, 0)],
+    [Orientation.West, new Vector(-1, 0)]
+  ]
+)
+
 export enum Direction {
   Forward = "forward",
   Backward = "backward"
@@ -25,40 +43,17 @@ export enum Rotation {
   Right = "right"
 }
 
+const add = (coordinates: Coordinates, vector: Vector): Coordinates => {
+  return new Coordinates(coordinates.x + vector.x, coordinates.y + vector.y)
+}
+
+const sub = (coordinates: Coordinates, vector: Vector): Coordinates => {
+  return new Coordinates(coordinates.x - vector.x, coordinates.y - vector.y)
+}
+
 export const translate = (coordinates: Coordinates, orientation: Orientation, direction: Direction): Coordinates => {
-  switch (direction) {
-    case Direction.Forward:
-      return translateForward(coordinates, orientation)
-    case Direction.Backward:
-      return translateBackward(coordinates, orientation)
-  }
-}
-
-
-const translateForward = ({ x, y }: Coordinates, orientation: Orientation): Coordinates => {
-  switch (orientation) {
-    case Orientation.North:
-      return new Coordinates(x, y + 1)
-    case Orientation.South:
-      return new Coordinates(x, y - 1)
-    case Orientation.West:
-      return new Coordinates(x - 1, y)
-    case Orientation.East:
-      return new Coordinates(x + 1, y)
-  }
-}
-
-const translateBackward = ({ x, y }: Coordinates, orientation: Orientation): Coordinates => {
-  switch (orientation) {
-    case Orientation.North:
-      return new Coordinates(x, y - 1)
-    case Orientation.South:
-      return new Coordinates(x, y + 1)
-    case Orientation.West:
-      return new Coordinates(x - 1, y)
-    case Orientation.East:
-      return new Coordinates(x + 1, y)
-  }
+  const vector = UNIT_VECTORS.get(orientation)
+  return direction === Direction.Forward ? add(coordinates, vector) : sub(coordinates, vector)
 }
 
 
