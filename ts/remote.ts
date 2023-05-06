@@ -9,17 +9,17 @@ export default class Remote {
 
   execute(command: string) {
     for (const letter of command) {
-      switch (letter) {
-        case 'F':
+      switch (letter.toLowerCase()) {
+        case 'f':
           this.target.moveForward()
           break
-        case 'B':
+        case 'b':
           this.target.moveBackward()
           break
-        case 'L':
+        case 'l':
           this.target.rotateLeft()
           break
-        case 'R':
+        case 'r':
           this.target.rotateRight()
           break
         default:
