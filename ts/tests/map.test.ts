@@ -24,7 +24,7 @@ const translateTests: translateTest[] =
     [[0, 3, Orientation.North, Direction.Backward], [0, 2]]
   ]
 
-describe('translate', () => {
+describe('translations', () => {
   test.each(translateTests)("Translating %s -> %s", (input, expected) => {
     const [x, y, orientation, direction] = input
     const coordinates = new Coordinates(x, y)
