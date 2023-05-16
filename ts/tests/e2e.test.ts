@@ -1,7 +1,7 @@
 import { describe, test, expect } from '@jest/globals'
-import Rover from '../rover'
-import { Coordinates } from '../map'
-import Remote from '../remote'
+import Rover from '../src/rover'
+import { Coordinates } from '../src/map'
+import Remote from '../src/remote'
 
 describe('end to end tests', () => {
   test('moving the rover around', () => {

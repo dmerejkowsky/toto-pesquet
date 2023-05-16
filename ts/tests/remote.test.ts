@@ -1,6 +1,6 @@
 import { describe, test, expect } from '@jest/globals'
-import Remote from '../remote'
-import Movable from '../movable'
+import Remote from '../src/remote'
+import Movable from '../src/movable'
 
 class FakeMovable implements Movable {
   moves: string[]

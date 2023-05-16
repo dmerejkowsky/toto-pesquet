@@ -1,6 +1,6 @@
 import { describe, test, expect } from '@jest/globals'
 
-import { Coordinates, Direction, Orientation, Rotation, rotate, translate } from '../map'
+import { Coordinates, Direction, Orientation, Rotation, rotate, translate } from '../src/map'
 
 type rotationTest = [[Orientation, Rotation], Orientation]
 const rotationTests: rotationTest[] = [

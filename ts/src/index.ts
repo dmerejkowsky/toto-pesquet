@@ -19,7 +19,11 @@ const main = async () => {
     try {
       remote.execute(command)
     } catch (e) {
-      console.log(e.message)
+      if (e instanceof Error) {
+        console.log(e.message)
+      } else {
+        console.error(e)
+      }
     }
     console.log(rover.coordinates, rover.orientation)
   }

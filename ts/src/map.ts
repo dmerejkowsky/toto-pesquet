@@ -6,6 +6,10 @@ export class Coordinates {
     this.x = x
     this.y = y
   }
+
+  toString(): string {
+    return `${this.x} ${this.y}`
+  }
 }
 
 export enum Orientation {
@@ -53,6 +57,9 @@ const sub = (coordinates: Coordinates, vector: Vector): Coordinates => {
 
 export const translate = (coordinates: Coordinates, orientation: Orientation, direction: Direction): Coordinates => {
   const vector = UNIT_VECTORS.get(orientation)
+  if (!vector) {
+    throw new Error(`unit vector not found for ${orientation}`)
+  }
   return direction === Direction.Forward ? add(coordinates, vector) : sub(coordinates, vector)
 }
 

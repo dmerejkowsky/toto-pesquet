@@ -1,7 +1,10 @@
 {
-  "files" : ["src/main.ts", "src/greet.ts"],
+  "include": [
+    "src/*.ts"
+  ],
   "compilerOptions": {
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "target": "ES6"
   }
 }

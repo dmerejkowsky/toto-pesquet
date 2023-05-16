@@ -1,6 +1,6 @@
-import Rover from '../rover'
-import { describe, test, expect } from '@jest/globals'
-import { Coordinates, Orientation } from '../map'
+import { test, expect } from '@jest/globals'
+import { Coordinates, Orientation } from '../src/map'
+import Rover from '../src/rover'
 
 test('starts facing north', () => {
   const landingPosition = new Coordinates(0, 2)

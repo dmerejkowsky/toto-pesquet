@@ -27,5 +27,8 @@ export default class Rover implements Movable {
     this.orientation = rotate(this.orientation, Rotation.Right)
   }
 
+  toString(): string {
+    return `Rover at ${this.coordinates} facing ${this.orientation}`
+  }
 
 }
