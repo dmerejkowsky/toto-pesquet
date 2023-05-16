@@ -1,4 +1,5 @@
 {
+  "files" : ["src/main.ts", "src/greet.ts"],
   "compilerOptions": {
     "esModuleInterop": true,
     "strict": true

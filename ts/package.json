@@ -15,7 +15,13 @@
   "devDependencies": {
     "@jest/globals": "^29.5.0",
     "@types/prompt": "^1.1.5",
+    "browserify": "^17.0.0",
+    "fancy-log": "^2.0.0",
+    "gulp": "^4.0.2",
     "jest": "^29.5.0",
-    "ts-jest": "^29.1.0"
+    "ts-jest": "^29.1.0",
+    "tsify": "^5.0.4",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^4.0.0"
   }
 }
