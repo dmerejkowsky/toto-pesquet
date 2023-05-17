@@ -11,7 +11,7 @@ var watchedBrowserify = watchify(
   browserify({
     basedir: ".",
     debug: true,
-    entries: ["src/main.ts"],
+    entries: ["src/web.ts"],
     files: ["src/index.html"],
     cache: {},
     packageCache: {},
